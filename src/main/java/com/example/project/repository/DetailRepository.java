@@ -103,4 +103,7 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
 
     @Query(value = "DELETE FROM poc_detail where detail_id = :id",nativeQuery = true)
     int deleteByDetail_Id(@Param("id") int id);
+
+    @Query(value = "SELECT * FROM poc_detail where detail_id = :id",nativeQuery = true)
+    Detail findByDetail_id(@Param("id")int id);
 }

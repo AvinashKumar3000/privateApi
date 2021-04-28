@@ -53,8 +53,10 @@ public class DetailService {
     // DELETE
     public void deleteDetail(int id){
         // delete the rows in digit store table
-        digitalStoreRepository.deletebyDetail_id(id);
-        repository.deleteByDetail_Id(id);
+        // digitalStoreRepository.deletebyDetail_id(id);
+        //repository.deleteByDetail_Id(id);
+        Detail detail = repository.findByDetail_id(id);
+        repository.delete(detail);
     }
     // get
     public List<Detail> searchByTechnology(String tech) {
