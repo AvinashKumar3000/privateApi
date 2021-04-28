@@ -10,12 +10,12 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="lob")
+@Table(name="sub_isu")
 public class SubIsu {
     @Id
     @GeneratedValue
     private int id;
-    private String name;
+    private String value;
     @Column(name="isu_id")
     private int isuId;
 }

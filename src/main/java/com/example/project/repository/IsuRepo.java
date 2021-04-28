@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IsuRepo extends JpaRepository<Isu,Integer> {
-    Isu findByName(String inputName);
+    Isu findByValue(String inputName);
 }

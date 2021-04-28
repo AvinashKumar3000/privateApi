@@ -17,6 +17,6 @@ import javax.persistence.Table;
 public class Isu {
     @Id
     @GeneratedValue
-    private int id;
-    private String name;
+    private int isu_id;
+    private String value;
 }

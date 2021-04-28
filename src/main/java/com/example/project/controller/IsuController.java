@@ -1,8 +1,8 @@
 package com.example.project.controller;
 
-import com.example.project.entity.Industry;
-import com.example.project.entity.Lob;
-import com.example.project.service.IndustryService;
+import com.example.project.entity.Isu;
+import com.example.project.entity.SubIsu;
+import com.example.project.service.IsuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,26 +12,19 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class IsuController {
     @Autowired
-    private IndustryService service;
+    private IsuService service;
     @GetMapping("/isu")
-    public List<Industry> getAllIndustries(){
-        return service.listIndustries();
+    public List<Isu> getAllIndustries(){
+        return service.listIsu();
     }
     @GetMapping("/isu/{name}")
-    public List<Lob> getAll(@PathVariable String name){
+    public List<SubIsu> getAll(@PathVariable String name){
         return service.listLobByQuery(name);
     }
     @GetMapping("/isuById/{id}")
-    public List<Lob> getAl(@PathVariable int id){
-        return service.listLobByIdQuery(id);
+    public List<SubIsu> getAl(@PathVariable int id){
+        return service.listByIdQuery(id);
     }
 
-    @PostMapping("/isu")
-    public Industry save(@RequestBody Industry domain){
-        return service.saveIndustry(domain);
-    }
-    @PostMapping("/saveAllIsu")
-    public List<Industry> saveAll(@RequestBody List<Industry> domains){
-        return service.saveAllIndustries(domains);
-    }
+    
 }
