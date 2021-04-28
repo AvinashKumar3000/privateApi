@@ -91,7 +91,6 @@ public class Detail {
     @Lob
     @Column(name = "tcs_solution")
     private String solution;
-    @Lob
     @Column(name = "technology")
     private String[] techStack;
     @Lob
