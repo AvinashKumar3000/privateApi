@@ -73,9 +73,6 @@ public class Detail {
     @Column(name = "pov")
     private String pov;
     @Lob
-    @Column(name = "problem_details")
-    private String problemDetails;
-    @Lob
     @Column(name = "product_owners")
     private String productOwners;
     @Lob

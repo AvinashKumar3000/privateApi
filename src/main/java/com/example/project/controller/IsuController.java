@@ -26,5 +26,5 @@ public class IsuController {
         return service.listByIdQuery(id);
     }
 
-    
+
 }
