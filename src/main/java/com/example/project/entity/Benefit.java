@@ -15,5 +15,5 @@ public class Benefit {
     @Id
     @GeneratedValue
     private int id;
-    private String name;
+    private String value;
 }
