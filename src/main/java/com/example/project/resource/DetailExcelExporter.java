@@ -50,7 +50,6 @@ public class DetailExcelExporter {
         createCell(row, 18, "LOB", style);
         createCell(row, 19, "Personas", style);
         createCell(row, 20, "POV", style);
-        createCell(row, 21, "Problem Details", style);
         createCell(row, 22, "Product Owners", style);
         createCell(row, 23, "Product Type", style);
         createCell(row, 24, "Start Date", style);
@@ -91,7 +90,6 @@ public class DetailExcelExporter {
         int columnCount = 0;
         createCell(row, columnCount++, detail.getDetail_id(),style);
         createCell(row, columnCount++, detail.getTitle(),style);
-        createCell(row, columnCount++, detail.getProblemDetails(),style);
         createCell(row, columnCount++, detail.getDomain(),style);
         createCell(row, columnCount++, detail.getLOB(),style);
         createCell(row, columnCount++, detail.getPersonas(),style);
