@@ -7,6 +7,9 @@ import com.example.project.repository.DetailRepository;
 import com.example.project.repository.DigitalStoreRepository;
 import com.example.project.repository.FeatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,12 +27,15 @@ public class DetailService {
     @Autowired
     private DigitalStoreRepository digitalStoreRepository;
     // POST
+    @Caching(evict = {
+            @CacheEvict(value = "detail",allEntries = true)})
     public Detail saveDetail(Detail detail) {
         return repository.save(detail);
     }
     // GET
+    @Cacheable("detail")
     public List<Detail> listDetails() {
-        return repository.findAll();
+        return repository.findAllByOrderByIdDesc();
     }
     public List<Detail> searchByIndustry(String domainName) {
         return repository.findByDomain(domainName);
@@ -45,12 +51,16 @@ public class DetailService {
         return repository.findByTitle(title);
     }
     // UPDATE
+    @Caching(evict = {
+            @CacheEvict(value = "detail",allEntries = true)})
     public Detail updateDetail(Detail newDetail) {
         Detail existingDetail = repository.findById(newDetail.getDetail_id()).orElse(null);
         existingDetail = newDetail;
         return repository.save(existingDetail);
     }
     // DELETE
+    @Caching(evict = {
+            @CacheEvict(value = "detail",allEntries = true)})
     public void deleteDetail(int id){
         // delete the rows in digit store table
         // digitalStoreRepository.deletebyDetail_id(id);

@@ -106,4 +106,7 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
 
     @Query(value = "SELECT * FROM poc_detail where detail_id = :id",nativeQuery = true)
     Detail findByDetail_id(@Param("id")int id);
+
+    @Query(value = "SELECT * FROM poc_detail ORDER BY detail_id DESC",nativeQuery = true)
+    List<Detail> findAllByOrderByIdDesc();
 }
