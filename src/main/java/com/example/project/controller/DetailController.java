@@ -54,7 +54,6 @@ public class DetailController {
             "subIsu",
             "github",
             "screenShot",
-            "TPC",
             "description"
     };
     String[] csvHeader = {
@@ -90,7 +89,6 @@ public class DetailController {
             "subIsu",
             "github",
             "screenShot",
-            "TPC",
             "description"
     };
     @Autowired

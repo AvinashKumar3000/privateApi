@@ -63,7 +63,6 @@ public class DetailExcelExporter {
         createCell(row, 32, "subIsu", style);
         createCell(row, 33, "github", style);
         createCell(row, 34, "screenShot", style);
-        createCell(row, 35, "TPC", style);
         createCell(row, 36,"Description",style);
     }
 
@@ -120,7 +119,6 @@ public class DetailExcelExporter {
         createCell(row, columnCount++, detail.getSubIsu(), style);
         createCell(row, columnCount++, detail.getGithub(), style);
         createCell(row, columnCount++, detail.getScreenShot(), style);
-        createCell(row, columnCount++, detail.getTPC(), style);
         createCell(row, columnCount++, detail.getDescription(), style);
     }
 
