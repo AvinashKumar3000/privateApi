@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface DigitalStoreRepository extends JpaRepository<DigitalStore, Integer> {
-    @Query(value = "DELETE FROM digital_store where detail_id = :id",nativeQuery = true)
-    int deletebyDetail_id(@Param("id") int id);
-//    @Query(name = "",)
-//    List<DigitalStore> queryExecution(int dtl_id);
+    @Query(value = "SELECT * from digital_store WHERE asset_type = :asset_id", nativeQuery = true)
+    List<DigitalStore> findAllByAsset_type(@Param("asset_id") int asset_id);
+    @Query(value = "SELECT * from digital_store where detail_id = :detail_id", nativeQuery = true)
+    List<DigitalStore> findAllByDetail_id(int detail_id);
 }

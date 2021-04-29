@@ -18,7 +18,7 @@ public class DigitalStore {
     private int id;
     private String title;
     private String asset;
-    private String tags;
+    private String tags[];
     private int detail_id;
     private int asset_type;
 }

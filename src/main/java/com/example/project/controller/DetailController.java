@@ -4,6 +4,7 @@ import com.example.project.entity.Detail;
 import com.example.project.resource.DetailExcelExporter;
 import com.example.project.resource.DetailsExcelExporter;
 import com.example.project.service.DetailService;
+import com.example.project.service.DigitalStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.supercsv.io.CsvBeanWriter;
@@ -93,7 +94,8 @@ public class DetailController {
     };
     @Autowired
     private DetailService service;
-
+    @Autowired
+    private DigitalStoreService digitalStoreService;
     // GET methods
     @GetMapping("/detail")
     public List<Detail> findAllDetails() {
@@ -235,6 +237,8 @@ public class DetailController {
 
     @DeleteMapping("/detail/{id}")
     public String deleteDetails(@PathVariable int id){
+
+        digitalStoreService.removeByDetailId(id);
         service.deleteDetail(id);
         return "The content deleted successfully";
     }

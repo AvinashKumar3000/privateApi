@@ -24,8 +24,6 @@ public class DetailService {
     private FeatureRepository featureRepository;
     @Autowired
     private BenefitRepository benefitRepository;
-    @Autowired
-    private DigitalStoreRepository digitalStoreRepository;
     // POST
     @Caching(evict = {
             @CacheEvict(value = "detail",allEntries = true)})
@@ -62,9 +60,6 @@ public class DetailService {
     @Caching(evict = {
             @CacheEvict(value = "detail",allEntries = true)})
     public void deleteDetail(int id){
-        // delete the rows in digit store table
-        // digitalStoreRepository.deletebyDetail_id(id);
-        //repository.deleteByDetail_Id(id);
         Detail detail = repository.findByDetail_id(id);
         repository.delete(detail);
     }
