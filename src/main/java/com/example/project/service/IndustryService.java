@@ -5,6 +5,9 @@ import com.example.project.entity.Lob;
 import com.example.project.repository.LobRepository;
 import com.example.project.repository.IndustryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,7 @@ public class IndustryService {
     @Autowired
     private LobRepository lobRepository;
     // get
+    @Cacheable("industry")
     public List<Industry> listIndustries(){
         return repository.findAll();
     }
@@ -30,6 +34,9 @@ public class IndustryService {
         return lobRepository.findByIndustryId(domainId);
     }
     // save
+    @Caching(evict = {
+            @CacheEvict(value = "industry",allEntries = true)
+    })
     public Industry saveIndustry(Industry domain){
         return repository.save(domain);
     }

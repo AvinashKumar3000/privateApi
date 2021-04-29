@@ -27,10 +27,7 @@ public class DropDownController {
     public List<TopCustomers> get3() {
         return service.getTopCustomers();
     }
-    @GetMapping("/sub-isu")
-    public List<SubIsu> get5() {
-        return service.getSubIsu();
-    }
+
     @GetMapping("/inno-category")
     public List<InnoCategory> get6() {
         return service.getInnoCategory();
