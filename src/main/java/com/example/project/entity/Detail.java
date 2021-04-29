@@ -114,9 +114,7 @@ public class Detail {
     @Lob
     @Column(name = "screenShot")
     private String screenShot;
-    @Lob
-    @Column(name = "tpc")
-    private String TPC;
+ 
 }
 
 
