@@ -113,6 +113,9 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
 
     @Query(value = "select count(detail_id) as count from poc_detail",nativeQuery = true)
     int getTotalCount();
-    
+    @Query(value = "select count(detail_id) as count from poc_detail where isu = :data",nativeQuery = true)
+    int getTotalIsuCount(@Param("data") String data);
+    @Query(value = "select count(detail_id) as count from poc_detail where sub_isu = :data",nativeQuery = true)
+    int getTotalSubIsuCount(@Param("data") String data);
 
 }

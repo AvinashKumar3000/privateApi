@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.entity.Detail;
+import com.example.project.resource.CountClass;
 import com.example.project.resource.DetailExcelExporter;
 import com.example.project.resource.DetailsExcelExporter;
 import com.example.project.resource.FilterInput;
@@ -260,5 +261,8 @@ public class DetailController {
         service.deleteDetail(id);
         return "The content deleted successfully";
     }
-
+    @GetMapping("/detail/count")
+    public CountClass getCount(){
+        return service.getCounts();
+    }
 }

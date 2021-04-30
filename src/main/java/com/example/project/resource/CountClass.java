@@ -8,22 +8,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CountClass {
-    public int total =0;
-    public int ge =0;
-    public int bfsi =0;
+    private int total =0;
+    private int ge =0;
+    private int bfsi =0;
     // GE
-    public int DTLI =0;
-    public int DI =0;
-    public int HealthCare_BH =0;
-    public int GE_Engineeringpublic =0;
+    private int DTLI =0;
+    private int DI =0;
+    private int HealthCare_BH =0;
+    private int GE_Engineeringprivate =0;
     // BFSI
-    public int Capital_Market_1 =0;
-    public int Capital_Market_2 =0;
-    public int Capital_Region =0;
-    public int Large_Bank_Mortgage =0;
-    public int Mid_Atlantic =0;
-    public int New_England =0;
-    public int PA_MI =0;
-    public int Mid_West =0;
-    public int Digital =0;
+    private int Capital_Market_1 =0;
+    private int Capital_Market_2 =0;
+    private int Capital_Region =0;
+    private int Large_Bank_Mortgage =0;
+    private int Mid_Atlantic =0;
+    private int New_England =0;
+    private int PA_MI =0;
+    private int Mid_West =0;
+    private int Digital =0;
 }

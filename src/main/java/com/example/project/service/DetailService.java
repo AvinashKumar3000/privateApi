@@ -6,6 +6,7 @@ import com.example.project.repository.BenefitRepository;
 import com.example.project.repository.DetailRepository;
 import com.example.project.repository.DigitalStoreRepository;
 import com.example.project.repository.FeatureRepository;
+import com.example.project.resource.CountClass;
 import com.example.project.resource.FilterInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -187,6 +188,26 @@ public class DetailService {
             }
         }
         return list;
+    }
+
+    public CountClass getCounts() {
+        CountClass countClass = new CountClass();
+        countClass.setTotal(repository.getTotalCount());
+        countClass.setGe(repository.getTotalIsuCount("GE"));
+        countClass.setBfsi(repository.getTotalIsuCount("BFSI"));
+        countClass.setDTLI(repository.getTotalSubIsuCount("DTLI"));
+        countClass.setDI(repository.getTotalSubIsuCount("DI"));
+        countClass.setHealthCare_BH(repository.getTotalSubIsuCount("HealthCare & BH"));
+        countClass.setGE_Engineeringprivate(repository.getTotalSubIsuCount("GE Engineering"));
+        countClass.setCapital_Market_1(repository.getTotalSubIsuCount("Capital Market-I"));
+        countClass.setCapital_Market_2(repository.getTotalSubIsuCount("Capital Market-II"));
+        countClass.setCapital_Region(repository.getTotalSubIsuCount("Large Bank/Mortgage"));
+        countClass.setMid_Atlantic(repository.getTotalIsuCount("Mid-Atlantic"));
+        countClass.setNew_England(repository.getTotalSubIsuCount("New England"));
+        countClass.setPA_MI(repository.getTotalSubIsuCount("PA & MI"));
+        countClass.setMid_West(repository.getTotalSubIsuCount("Mid-West"));
+        countClass.setDigital(repository.getTotalSubIsuCount("Digital"));
+        return countClass;
     }
 
 }
