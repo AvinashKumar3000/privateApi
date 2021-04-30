@@ -6,6 +6,7 @@ import com.example.project.repository.BenefitRepository;
 import com.example.project.repository.DetailRepository;
 import com.example.project.repository.DigitalStoreRepository;
 import com.example.project.repository.FeatureRepository;
+import com.example.project.resource.FilterInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DetailService {
@@ -42,6 +44,7 @@ public class DetailService {
     public List<Detail> searchByPersona(String persona) {
         List<Detail> details = repository.findAll();
         ArrayList<Detail> list = new ArrayList<Detail>() ;
+
         for (Detail detail:details) {
             String[] arr = detail.getPersonas();
             for(String str:arr){
@@ -49,6 +52,7 @@ public class DetailService {
                     list.add(detail);
                 }
             }
+
         }
         return list;
     }
@@ -145,5 +149,44 @@ public class DetailService {
 
     public List<Detail> listDetail() {
         return repository.findAll();
+    }
+
+    public List<Detail> searchByIsu(String isu) {
+        return repository.findAllByIsu(isu);
+    }
+
+    public List<Detail> searchBySubIsu(String subisu) {
+        return repository.findAllBySubIsu(subisu);
+    }
+
+    public boolean inArray(String []arr, String value){
+        if(value != null){
+            for(String str:arr){
+                if(str.equalsIgnoreCase(value)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public List<Detail> filter(FilterInput filterInput) {
+        List<Detail> details = repository.findAll();
+        ArrayList<Detail> list = new ArrayList<Detail>() ;
+
+        for (Detail detail:details) {
+            // domain
+            if( filterInput.getDomain() != null && detail.getDomain().equalsIgnoreCase(filterInput.getDomain()))
+            {
+              // persona
+                boolean personaStatus = inArray(detail.getPersonas(),filterInput.getPersona());
+                boolean techStatus = inArray(detail.getTechStack(),filterInput.getTechnology());
+                boolean tagStatus = inArray(detail.getTag(),filterInput.getTag());
+
+                if( personaStatus && techStatus && tagStatus) {
+                    list.add(detail);
+                }
+            }
+        }
+        return list;
     }
 }

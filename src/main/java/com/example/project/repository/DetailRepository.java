@@ -10,6 +10,8 @@ import java.util.List;
 public interface DetailRepository extends JpaRepository<Detail,Integer> {
     Detail findByTitle(String title);
     List<Detail> findByDomain(String domain);
+    List<Detail> findAllByIsu(String isu);
+    List<Detail> findAllBySubIsu(String subisu);
 
     @Query(value = "SELECT * FROM `poc_detail` WHERE start_date BETWEEN :fromDate AND :toDate", nativeQuery = true)
     List<Detail> startDateRange(@Param("fromDate") String fromDate,@Param("toDate") String toDate);
@@ -108,4 +110,5 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
 
     @Query(value = "SELECT * FROM poc_detail ORDER BY detail_id DESC",nativeQuery = true)
     List<Detail> findAllByOrderByIdDesc();
+
 }

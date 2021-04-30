@@ -3,6 +3,7 @@ package com.example.project.controller;
 import com.example.project.entity.Detail;
 import com.example.project.resource.DetailExcelExporter;
 import com.example.project.resource.DetailsExcelExporter;
+import com.example.project.resource.FilterInput;
 import com.example.project.service.DetailService;
 import com.example.project.service.DigitalStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +108,10 @@ public class DetailController {
     public List<Detail> findAllDetails() {
         return service.listDetails();
     }
+    @GetMapping("/detail/filter")
+    public List<Detail> filter(@RequestBody FilterInput filterInput){
+        return service.filter(filterInput);
+    }
     @GetMapping("/detail/searchByIndustry/{industry}") // Domain
     public List<Detail> searchDetailsByIndustry(@PathVariable String industry ) {
         return service.searchByIndustry(industry);
@@ -114,6 +119,14 @@ public class DetailController {
     @GetMapping("/detail/searchByPersona/{persona}")
     public List<Detail> searchDetailsByLob(@PathVariable String persona) {
         return service.searchByPersona(persona);
+    }
+    @GetMapping("/detail/searchByIsu/{isu}")
+    public List<Detail> searchByIsu(@PathVariable String isu){
+        return service.searchByIsu(isu);
+    }
+    @GetMapping("/detail/searchBySubIsu/{subisu}")
+    public List<Detail> searchBySubIsu(@PathVariable String subisu){
+        return service.searchBySubIsu(subisu);
     }
     @GetMapping("/detail/searchByTechnology/{tech}")
     public List<Detail> searchByTechnology(@PathVariable String tech) {
