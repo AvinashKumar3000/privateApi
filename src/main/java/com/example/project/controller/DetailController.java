@@ -108,7 +108,7 @@ public class DetailController {
     public List<Detail> findAllDetails() {
         return service.listDetails();
     }
-    @GetMapping("/detail/filter")
+    @PostMapping("/detail/filter")
     public List<Detail> filter(@RequestBody FilterInput filterInput){
         return service.filter(filterInput);
     }
