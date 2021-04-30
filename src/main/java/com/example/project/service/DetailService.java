@@ -170,7 +170,7 @@ public class DetailService {
         return false;
     }
     public List<Detail> filter(FilterInput filterInput) {
-        List<Detail> details = repository.findAll();
+        List<Detail> details = repository.findAllByOrderByIdDesc();
         ArrayList<Detail> list = new ArrayList<Detail>() ;
 
         for (Detail detail:details) {
