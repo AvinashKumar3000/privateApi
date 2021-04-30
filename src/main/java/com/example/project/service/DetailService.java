@@ -174,19 +174,16 @@ public class DetailService {
         ArrayList<Detail> list = new ArrayList<Detail>() ;
 
         for (Detail detail:details) {
-            // domain
-            if( filterInput.getDomain() != null && detail.getDomain().equalsIgnoreCase(filterInput.getDomain()))
-            {
-              // persona
-                boolean personaStatus = inArray(detail.getPersonas(),filterInput.getPersona());
-                boolean techStatus = inArray(detail.getTechStack(),filterInput.getTechnology());
-                boolean tagStatus = inArray(detail.getTag(),filterInput.getTag());
+            boolean domainStatus = filterInput.getDomain() != null && detail.getDomain().equalsIgnoreCase(filterInput.getDomain());
+            boolean personaStatus = inArray(detail.getPersonas(),filterInput.getPersona());
+            boolean techStatus = inArray(detail.getTechStack(),filterInput.getTechnology());
+            boolean tagStatus = inArray(detail.getTag(),filterInput.getTag());
 
-                if( personaStatus && techStatus && tagStatus) {
-                    list.add(detail);
-                }
+            if( domainStatus || personaStatus || techStatus || tagStatus ) {
+                list.add(detail);
             }
         }
         return list;
     }
+
 }
