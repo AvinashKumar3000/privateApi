@@ -260,4 +260,5 @@ public class DetailController {
         service.deleteDetail(id);
         return "The content deleted successfully";
     }
+
 }

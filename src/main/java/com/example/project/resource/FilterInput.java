@@ -13,7 +13,7 @@ public class FilterInput {
     private String tag;
     private String technology;
     public boolean isAllNull() {
-        if(this.domain == null && this.persona == null && this.tag == null && this.technology == null)
+        if(this.domain == "" && this.persona == "" && this.tag == "" && this.technology == "")
             return true;
         return false;
     }
