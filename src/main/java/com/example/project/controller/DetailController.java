@@ -24,21 +24,22 @@ public class DetailController {
 
     String[] nameMapping = {
             "detail_id",
-            "architectureDiagram",
-            "associatesContributing",
-            "brmCP",
-            "codeReference",
+            "architecture",
+            "associatesContributingToPOCs",
+            "benefits",
+            "features",
+            "brmorCP",
             "contextualMaster",
-            "crmId",
-            "customerAccount",
-            "demoVideo",
+            "crm",
+            "custAccount",
+            "demoVideoOrImage",
             "domain",
             "endDate",
-            "gt",
-            "innovationCategory",
+            "story",
+            "innoCategory",
             "innovistaChampion",
-            "kpi",
-            "lob",
+            "KPI",
+            "LOB",
             "personas",
             "pov",
             "productOwners",
@@ -46,51 +47,52 @@ public class DetailController {
             "startDate",
             "status",
             "tag",
-            "tcsSolution",
-            "technology",
+            "solution",
+            "techStack",
             "title",
+            "description",
             "topProspectiveCustomers",
-            "crowdSourcingChampion",
+            "crowdSourcingChampionOrDP",
             "isu",
             "subIsu",
             "github",
-            "screenShot",
-            "description"
+            "screenShot"
     };
     String[] csvHeader = {
-            "Id",
-            "Architecture Diagram",
-            "Associates Contributing",
-            "BRM/CP",
-            "Code Reference",
-            "Contextual Master",
-            "CRM Id",
-            "Customer Account",
-            "Demo Video",
-            "Domain",
-            "End Date",
-            "G&T Story",
-            "Innovation Category",
-            "Innovista Champion",
+            "detail_id",
+            "architecture",
+            "associatesContributingToPOCs",
+            "benefits",
+            "features",
+            "brmorCP",
+            "contextualMaster",
+            "crm",
+            "custAccount",
+            "demoVideoOrImage",
+            "domain",
+            "endDate",
+            "story",
+            "innoCategory",
+            "innovistaChampion",
             "KPI",
             "LOB",
-            "Personas",
-            "POV",
-            "Product Owners",
-            "Product Type",
-            "Start Date",
-            "Status",
-            "Tag",
-            "Tcs Solution",
-            "Technology",
-            "Title",
-            "Top Prospective Customers",
-            "Crowd Sourcing Champion",
-            "ISU",
+            "personas",
+            "pov",
+            "productOwners",
+            "productType",
+            "startDate",
+            "status",
+            "tag",
+            "solution",
+            "techStack",
+            "title",
+            "description",
+            "topProspectiveCustomers",
+            "crowdSourcingChampionOrDP",
+            "isu",
             "subIsu",
             "github",
-            "screenShot",
-            "description"
+            "screenShot"
     };
     @Autowired
     private DetailService service;
@@ -98,6 +100,10 @@ public class DetailController {
     private DigitalStoreService digitalStoreService;
     // GET methods
     @GetMapping("/detail")
+    public List<Detail> findAllDetailsAsc() {
+        return service.listDetail();
+    }
+    @GetMapping("/detail/desc")
     public List<Detail> findAllDetails() {
         return service.listDetails();
     }
@@ -105,9 +111,9 @@ public class DetailController {
     public List<Detail> searchDetailsByIndustry(@PathVariable String industry ) {
         return service.searchByIndustry(industry);
     }
-    @GetMapping("/detail/searchByLob/{lob}")
-    public List<Detail> searchDetailsByLob(@PathVariable String lob) {
-        return service.searchByLob(lob);
+    @GetMapping("/detail/searchByPersona/{persona}")
+    public List<Detail> searchDetailsByLob(@PathVariable String persona) {
+        return service.searchByPersona(persona);
     }
     @GetMapping("/detail/searchByTechnology/{tech}")
     public List<Detail> searchByTechnology(@PathVariable String tech) {

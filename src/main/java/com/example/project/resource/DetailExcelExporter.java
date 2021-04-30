@@ -35,7 +35,6 @@ public class DetailExcelExporter {
         createCell(row, 1, "Architecture Diagram", style);
         createCell(row, 2, "Associates Contributing Topocs", style);
         createCell(row, 4, "BRM/CP", style);
-        createCell(row, 5, "Code Reference", style);
         createCell(row, 6, "Contextual Master", style);
         createCell(row, 7, "CRM Id", style);
         createCell(row, 8, "Crowd Sourcing Champion", style);
@@ -100,7 +99,6 @@ public class DetailExcelExporter {
         createCell(row, columnCount++, detail.getProductType(),style);
         createCell(row, columnCount++, detail.getStatus(),style);
         createCell(row, columnCount++, detail.getTechStack(),style);
-        createCell(row, columnCount++, detail.getCodeReference(),style);
         createCell(row, columnCount++, detail.getDemoVideoOrImage(),style);
         createCell(row, columnCount++, detail.getPov(),style);
         createCell(row, columnCount++, detail.getArchitecture(),style);

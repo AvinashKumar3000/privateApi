@@ -34,9 +34,6 @@ public class Detail {
     @Column(name = "brm_cp")
     private String brmorCP;
     @Lob
-    @Column(name = "code_reference")
-    private String codeReference;
-    @Lob
     @Column(name = "contextual_master")
     private String contextualMaster;
     @Lob

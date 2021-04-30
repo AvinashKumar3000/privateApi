@@ -39,8 +39,18 @@ public class DetailService {
         return repository.findByDomain(domainName);
     }
 
-    public List<Detail> searchByLob(String lob) {
-        return repository.findByLOB(lob);
+    public List<Detail> searchByPersona(String persona) {
+        List<Detail> details = repository.findAll();
+        ArrayList<Detail> list = new ArrayList<Detail>() ;
+        for (Detail detail:details) {
+            String[] arr = detail.getPersonas();
+            for(String str:arr){
+                if(str.equalsIgnoreCase(persona)){
+                    list.add(detail);
+                }
+            }
+        }
+        return list;
     }
     public Detail searchById(int id) {
         return repository.findById(id).orElse(null);
@@ -66,11 +76,13 @@ public class DetailService {
     // get
     public List<Detail> searchByTechnology(String tech) {
         List<Detail> details = repository.findAll();
-        ArrayList<Detail> list = new ArrayList<Detail>();
-        for (Detail detail: details) {
-            boolean foundStatus = Arrays.asList(detail.getTechStack()).contains(tech);
-            if(foundStatus){
-                list.add(detail);
+        ArrayList<Detail> list = new ArrayList<Detail>() ;
+        for (Detail detail:details) {
+            String[] arr = detail.getTechStack();
+            for(String str:arr){
+                if(str.equalsIgnoreCase(tech)){
+                    list.add(detail);
+                }
             }
         }
         return list;
@@ -78,22 +90,26 @@ public class DetailService {
 
     public List<Detail> searchByKpi(String kpi) {
         List<Detail> details = repository.findAll();
-        ArrayList<Detail> list = new ArrayList<Detail>();
-        for (Detail detail: details) {
-            boolean foundStatus = Arrays.asList(detail.getKPI()).contains(kpi);
-            if(foundStatus){
-                list.add(detail);
+        ArrayList<Detail> list = new ArrayList<Detail>() ;
+        for (Detail detail:details) {
+            String[] arr = detail.getKPI();
+            for(String str:arr){
+                if(str.equalsIgnoreCase(kpi)){
+                    list.add(detail);
+                }
             }
         }
         return list;
     }
     public List<Detail> searchByTag(String tag) {
         List<Detail> details = repository.findAll();
-        ArrayList<Detail> list = new ArrayList<Detail>();
-        for (Detail detail: details) {
-            boolean foundStatus = Arrays.asList(detail.getTag()).contains(tag);
-            if(foundStatus){
-                list.add(detail);
+        ArrayList<Detail> list = new ArrayList<Detail>() ;
+        for (Detail detail:details) {
+            String[] arr = detail.getTag();
+            for(String str:arr){
+                if(str.equalsIgnoreCase(tag)){
+                    list.add(detail);
+                }
             }
         }
         return list;
@@ -125,5 +141,9 @@ public class DetailService {
 
     public List<Detail> saveAllDetails(List<Detail> details) {
         return repository.saveAll(details);
+    }
+
+    public List<Detail> listDetail() {
+        return repository.findAll();
     }
 }

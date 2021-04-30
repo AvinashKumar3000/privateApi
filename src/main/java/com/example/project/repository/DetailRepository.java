@@ -10,14 +10,13 @@ import java.util.List;
 public interface DetailRepository extends JpaRepository<Detail,Integer> {
     Detail findByTitle(String title);
     List<Detail> findByDomain(String domain);
-    List<Detail> findByLOB(String lob);
 
-    @Query(value = "SELECT * FROM `poc_details` WHERE start_date BETWEEN :fromDate AND :toDate", nativeQuery = true)
+    @Query(value = "SELECT * FROM `poc_detail` WHERE start_date BETWEEN :fromDate AND :toDate", nativeQuery = true)
     List<Detail> startDateRange(@Param("fromDate") String fromDate,@Param("toDate") String toDate);
-    @Query(value = "SELECT * FROM `poc_details` WHERE start_date BETWEEN :fromDate AND :toDate", nativeQuery = true)
+    @Query(value = "SELECT * FROM `poc_detail` WHERE start_date BETWEEN :fromDate AND :toDate", nativeQuery = true)
     List<Detail> endDateRange(@Param("fromDate") String fromDate,@Param("toDate") String toDate);
 
-    @Query(value = "SELECT ISU,crowd_sourcing_champion, CONCAT ( YEAR(start_date), '-', CONCAT ( 'Q', Quarter(start_date) ) ) AS year_quarter, DENSE_RANK() OVER ( PARTITION BY ISU ORDER BY Concat ( YEAR(start_date), '-', CONCAT ( 'Q', Quarter(start_date) ) ) ) AS rank_ci, SUM( associates_contributing ) AS ASSOCIATES_CONTRI FROM poc_data group by ISU,crowd_sourcing_champion,start_date ORDER BY start_date",
+    @Query(value = "SELECT ISU,crowd_sourcing_champion, CONCAT ( YEAR(start_date), '-', CONCAT ( 'Q', Quarter(start_date) ) ) AS year_quarter, DENSE_RANK() OVER ( PARTITION BY ISU ORDER BY Concat ( YEAR(start_date), '-', CONCAT ( 'Q', Quarter(start_date) ) ) ) AS rank_ci, SUM( associates_contributing ) AS ASSOCIATES_CONTRI FROM poc_detail group by ISU,crowd_sourcing_champion,start_date ORDER BY start_date",
     nativeQuery = true)
     List<Object> crowdQuery();
 
@@ -42,7 +41,7 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
             "            )\n" +
             "\t\t) ASC ) AS RANK_CI,\n" +
             "SUM(associates_contributing) AS ASSOCIATES_CONTRI\n" +
-            "FROM poc_data\n" +
+            "FROM poc_detail\n" +
             "group by ISU,technology,start_date\n" +
             "ORDER BY start_date",
     nativeQuery = true)
@@ -69,7 +68,7 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
             "\t) ASC \n" +
             ") AS RANK_CI,\n" +
             "SUM(associates_contributing) AS ASSOCIATES_CONTRI\n" +
-            "FROM poc_data\n" +
+            "FROM poc_detail\n" +
             "group by ISU,lob,start_date\n" +
             "ORDER BY start_date\n",
     nativeQuery = true)
@@ -95,7 +94,7 @@ public interface DetailRepository extends JpaRepository<Detail,Integer> {
             "\t)\n" +
             ") ASC ) AS RANK_CI,\n" +
             "SUM(associates_contributing) AS ASSOCIATES_CONTRI\n" +
-            "FROM poc_data\n" +
+            "FROM poc_detail\n" +
             "group by ISU,status,start_date\n" +
             "ORDER BY start_date",
     nativeQuery = true)
