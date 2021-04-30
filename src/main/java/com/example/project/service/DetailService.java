@@ -171,6 +171,9 @@ public class DetailService {
     }
     public List<Detail> filter(FilterInput filterInput) {
         List<Detail> details = repository.findAllByOrderByIdDesc();
+        if(filterInput.isAllNull()){
+            return details;
+        }
         ArrayList<Detail> list = new ArrayList<Detail>() ;
 
         for (Detail detail:details) {

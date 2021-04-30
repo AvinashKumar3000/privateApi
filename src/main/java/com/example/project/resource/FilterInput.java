@@ -12,4 +12,9 @@ public class FilterInput {
     private String persona;
     private String tag;
     private String technology;
+    public boolean isAllNull() {
+        if(this.domain == null && this.persona == null && this.tag == null && this.technology == null)
+            return true;
+        return false;
+    }
 }

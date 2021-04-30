@@ -256,7 +256,6 @@ public class DetailController {
 
     @DeleteMapping("/detail/{id}")
     public String deleteDetails(@PathVariable int id){
-
         digitalStoreService.removeByDetailId(id);
         service.deleteDetail(id);
         return "The content deleted successfully";
