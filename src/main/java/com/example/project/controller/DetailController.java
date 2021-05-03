@@ -1,10 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.entity.Detail;
-import com.example.project.resource.CountClass;
-import com.example.project.resource.DetailExcelExporter;
-import com.example.project.resource.DetailsExcelExporter;
-import com.example.project.resource.FilterInput;
+import com.example.project.resource.*;
 import com.example.project.service.DetailService;
 import com.example.project.service.DigitalStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -264,5 +261,9 @@ public class DetailController {
     @GetMapping("/detail/count")
     public CountClass getCount(){
         return service.getCounts();
+    }
+    @PostMapping("/detail/idArray")
+    public List<Detail> arrayList(@RequestBody ArrayInput arrayInput) {
+        return  service.getByArray(arrayInput);
     }
 }

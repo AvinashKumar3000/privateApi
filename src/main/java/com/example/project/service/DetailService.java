@@ -6,6 +6,7 @@ import com.example.project.repository.BenefitRepository;
 import com.example.project.repository.DetailRepository;
 import com.example.project.repository.DigitalStoreRepository;
 import com.example.project.repository.FeatureRepository;
+import com.example.project.resource.ArrayInput;
 import com.example.project.resource.CountClass;
 import com.example.project.resource.FilterInput;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,4 +215,15 @@ public class DetailService {
         return countClass;
     }
 
+    public List<Detail> getByArray(ArrayInput arrayInput) {
+        int[] ids = arrayInput.getIds();
+        ArrayList<Detail> li = new ArrayList<Detail>();
+        for(int id:ids) {
+            Detail detail = repository.findById(id).orElse(null);
+            if(detail != null) {
+                li.add(detail);
+            }
+        }
+        return li;
+    }
 }
