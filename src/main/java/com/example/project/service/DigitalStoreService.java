@@ -47,9 +47,13 @@ public class DigitalStoreService {
         }
     }
     // delete
+    @Caching(evict = {
+            @CacheEvict(value = "digital_store",allEntries = true)})
     public void removeData(int id){
         repository.deleteById(id);
     }
+    @Caching(evict = {
+            @CacheEvict(value = "digital_store",allEntries = true)})
     public void removeByDetailId(int detail_id){
         List<DigitalStore> digitalStores = this.getAllDataByDetailId(detail_id);
         for (DigitalStore digitalStore: digitalStores) {

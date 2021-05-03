@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.persistence.Lob;
 import java.sql.Date;
 import java.util.List;
-import java.util.Set;
+
+import javax.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -109,9 +111,7 @@ public class Detail {
     @Column(name = "github")
     private String github;
     @Lob
-    @Column(name = "screenShot")
-    private String screenShot;
-
+    private byte[] screenShot;
 }
 
 
