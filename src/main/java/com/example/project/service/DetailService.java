@@ -268,7 +268,7 @@ public class DetailService {
             // top 5
             ArrayList<Detail> finalResult = new ArrayList<Detail>();
             for(Integer idx:idList){
-                finalResult.add(details.get(idx)); // 
+                finalResult.add(details.get(idx)); //
             }
             return finalResult;
         }
@@ -308,4 +308,9 @@ public class DetailService {
         return idList;
     }
 }
+// persona - [item1, item2], kpi = [item1]
+
+// list all details
+// score  = 2
+// [] descending order
 
