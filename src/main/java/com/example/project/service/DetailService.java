@@ -19,10 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service
 public class DetailService {
@@ -34,7 +32,8 @@ public class DetailService {
     private BenefitRepository benefitRepository;
     // POST
     @Caching(evict = {
-            @CacheEvict(value = "detail",allEntries = true)})
+            @CacheEvict(value = "detail",allEntries = true),
+            @CacheEvict(value = "count",allEntries = true)})
     public Detail saveDetail(Detail detail) {
         return repository.save(detail);
     }
@@ -78,7 +77,8 @@ public class DetailService {
     }
     // DELETE
     @Caching(evict = {
-            @CacheEvict(value = "detail",allEntries = true)})
+            @CacheEvict(value = "detail",allEntries = true),
+            @CacheEvict(value = "count",allEntries = true)})
     public void deleteDetail(int id){
         Detail detail = repository.findByDetail_id(id);
         repository.delete(detail);
@@ -195,6 +195,7 @@ public class DetailService {
         return list;
     }
 
+    @Cacheable("count")
     public CountClass getCounts() {
         CountClass countClass = new CountClass();
         countClass.setTotal(repository.getTotalCount());
@@ -226,4 +227,85 @@ public class DetailService {
         }
         return li;
     }
+
+    public List<Detail> recommendation(int detail_id){
+        System.out.println("recommendation api called"); // testing purpose
+        // consider detail_id = 455
+        Detail detail = repository.findById(detail_id).orElse(null);
+
+        if(detail != null){ // found detail
+            System.out.println("recommendation algo started");
+            String[] toSearchPersona = detail.getPersonas();
+            String[] toSearchKpi = detail.getKPI();
+
+            List<Detail> details = this.listDetails(); // get all list of details...
+            ArrayList<int[]> items = new ArrayList<int[]>(); // [[idx,score],[detail_id,5],[1,4] ]
+            // storing pairs as [detail_id,score]
+            for(int i=0;i<details.size();i++) {
+                Detail detail1 = details.get(i);
+                if(detail1.getDetail_id() == detail.getDetail_id())
+                    continue;
+
+                int score = 0;
+                // persona
+                String[] toSearchInPersona = detail1.getPersonas();
+                for(String value:toSearchPersona) {
+                    if(inArray(toSearchInPersona,value)){
+                        score++;
+                    }
+                }
+                // persona
+                String[] toSearchInKpi = detail1.getKPI();
+                for(String value:toSearchKpi) {
+                    if(inArray(toSearchInKpi,value)){
+                        score++;
+                    }
+                }
+                int[] result = new int[]{i,score};
+                items.add(result);
+            }
+            List<Integer> idList = this.getTop(items); // we will get
+            // top 5
+            ArrayList<Detail> finalResult = new ArrayList<Detail>();
+            for(Integer idx:idList){
+                finalResult.add(details.get(idx)); // 
+            }
+            return finalResult;
+        }
+        return null;
+    }
+
+    private List<Integer> getTop(ArrayList<int[]> items) {
+        // [ [idx,score] [] ] = > [score,score] // [3,5,2,1] => [5,3,2,1]
+        ArrayList<Integer> idList = new ArrayList<Integer>();
+        int length = items.size();
+        Integer[] arr = new Integer[length];
+        for(int i=0;i<length;i++){
+            int[] temp = items.get(i);
+            arr[i] = temp[1];
+        }
+        Arrays.sort(arr, Collections.reverseOrder()); // sorted desc order
+        // arr = [desc..]
+        // top5 score [] if in
+        int limit = 5;
+        int top = 0;
+        for(int j = 0 ; j < arr.length ; j++) {
+            if( limit == 0 || ( 10 - limit ) == items.size()) { // if limit exceeds
+                break;
+            }
+            for(int i=0;i<items.size();i++){
+                if( limit == 0) { // if limit exceeds
+                    break;
+                }
+                int[] item = items.get(i);
+                if(item[1] == arr[j]) { // item.score == highest score
+                    // then add idx to the idList
+                    idList.add(item[0]);
+                    limit--;
+                }
+            }
+        }
+        return idList;
+    }
 }
+

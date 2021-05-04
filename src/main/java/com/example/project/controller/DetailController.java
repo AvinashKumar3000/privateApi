@@ -266,4 +266,8 @@ public class DetailController {
     public List<Detail> arrayList(@RequestBody ArrayInput arrayInput) {
         return  service.getByArray(arrayInput);
     }
+    @GetMapping("/detail/recommendation/{detail_id}")
+    public List<Detail> reco(@PathVariable int detail_id){
+        return service.recommendation(detail_id);
+    }
 }

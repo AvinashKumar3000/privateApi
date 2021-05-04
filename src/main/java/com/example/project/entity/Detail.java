@@ -111,7 +111,7 @@ public class Detail {
     @Column(name = "github")
     private String github;
     @Lob
-    private byte screenShot;
+    private String screenShot;
 }
 
 
