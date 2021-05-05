@@ -1,10 +1,8 @@
 package com.example.project.service;
 
-import com.example.project.entity.Benefit;
 import com.example.project.entity.Detail;
 import com.example.project.repository.BenefitRepository;
 import com.example.project.repository.DetailRepository;
-import com.example.project.repository.DigitalStoreRepository;
 import com.example.project.repository.FeatureRepository;
 import com.example.project.resource.ArrayInput;
 import com.example.project.resource.CountClass;
@@ -14,12 +12,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -290,23 +282,26 @@ public class DetailService {
         int limit = 5;
         int top = 0;
         for(int j = 0 ; j < arr.length ; j++) {
-            if( limit == 0 || ( 10 - limit ) == items.size()) { // if limit exceeds
-                break;
-            }
-            for(int i=0;i<items.size();i++){
-                if( limit == 0) { // if limit exceeds
-                    break;
-                }
+            int lvl = arr[j];
+            System.out.println(lvl);
+            for(int i = 0 ; i < items.size() ; i++ ){
                 int[] item = items.get(i);
-                if(item[1] == arr[j]) { // item.score == highest score
-                    // then add idx to the idList
+                if( item[1] == lvl ) {
                     idList.add(item[0]);
                     limit--;
                 }
+                if(limit == 0) break;
             }
+            if(limit == 0) break;
+            if(lvl == arr[j+1]){
+                j++;
+            }
+
         }
         return idList;
     }
+
+
 }
 // persona - [item1, item2], kpi = [item1]
 
